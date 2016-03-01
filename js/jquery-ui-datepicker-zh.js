@@ -14,17 +14,15 @@
             dateNative.getDate()
         );
 
-    // 補0函式
-    var padLeft = function(str, len){
+    var pad_left = function(str, len){
+        str = str.toString();
         if(str.length >= len){
             return str;
         }else{
-            return padLeft(("0" + str), len);
+            return pad_left(("0" + str), len);
         }
     };
 
-
-    // 應該有更好的做法
     var funcColle = {
         onSelect: {
             basic: function(dateText, inst){
@@ -33,21 +31,10 @@
                  ? inst.selectedYear + 1911 : inst.selectedYear;*/
                 dateNative = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
 
-                // 年分小於100會被補成19**, 要做例外處理
-                var yearTW = inst.selectedYear > 1911
-                    ? padLeft(inst.selectedYear - 1911, 4)
-                    : inst.selectedYear;
-                var monthTW = padLeft(inst.selectedMonth + 1, 2);
-                var dayTW = padLeft(inst.selectedDay, 2);
-                if(monthTW == '010' || monthTW =='011' || monthTW=='012'){
-                    monthTW = monthTW.substr(1,2);
-                }
-
-                dateTW = new Date(
-                    yearTW + '-' +
-                    monthTW + '-' +
-                    dayTW + 'T00:00:00.000Z'
-                );
+                var yearTW = inst.selectedYear > 1911? pad_left(inst.selectedYear - 1911, 4): inst.selectedYear;
+                var monthTW = pad_left(inst.selectedMonth + 1, 2);
+                var dayTW = pad_left(inst.selectedDay, 2);
+                dateTW = new Date(yearTW + '-' +monthTW + '-' +dayTW + 'T00:00:00.000Z');
                 return $.datepicker.formatDate(twSettings.dateFormat, dateTW);
             }
         }
