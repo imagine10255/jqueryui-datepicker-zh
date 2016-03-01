@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="./core/jquery-ui.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="form-group">
+
+    <label class="control-label col-md-2 bg-green "><span class="required"></span> Birthday</label>
+    <div class="col-md-10">
+        <input type="text" class="form-control" name="birthday_tw" id="birthday_tw"
+               value=""
+               placeholder="74-11-22" required/>
+    </div>
+</div>
+</body>
+</html>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="./core/jquery-1.11.2.min.js"></script>
+<script src="./core/jquery-ui.min.js"></script>
+
+<!-- zh format package-->
+<script src="./js/jquery-ui-datepicker-zh.js"></script>
+<script>
+    $( "#birthday_tw" ).datepickerTW({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        yearRange: '50:104'
+    });
+</script>
