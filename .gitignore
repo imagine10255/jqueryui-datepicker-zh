@@ -1,0 +1,6 @@
+!.gitignore
+Thumbs.db
+.idea
+.env
+.env.swp
+nohup.out
