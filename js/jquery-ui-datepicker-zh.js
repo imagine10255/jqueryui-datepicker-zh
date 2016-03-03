@@ -5,8 +5,6 @@
 
 (function(){
 
-    var yearTextSelector = '.ui-datepicker-year';
-
     var dateNative = new Date(),
         dateTW = new Date(
             dateNative.getFullYear() - 1911,
@@ -67,7 +65,7 @@
         }
     };
 
-    // 把yearText換成民國
+    // yearText convert zh-format
     var replaceYearText = function(){
         var $yearText = $('.ui-datepicker-year');
 
@@ -110,15 +108,11 @@
                 }
                 options.yearRange = temp[0] + ':' + temp[1];
             }
-            // if input val not empty
-            if($(this).val() !== ''){
-                options.defaultDate = $(this).val();
-            }
+
         }
 
         // setting after init
         if(arguments.length > 1){
-            // 目前還沒想到正常的解法, 先用轉換成init setting obj的形式
             if(arguments[0] === 'option'){
                 options = {};
                 options[arguments[1]] = arguments[2];
@@ -146,9 +140,7 @@
                 // 當有year range時, select初始化設成range的最末年
                 if(twSettings.yearRange){
                     var $yearSelect = $('.ui-datepicker-year'),
-                        nowYear = twSettings.defaultDate
-                            ? $(this).datepicker('getDate').getFullYear()
-                            : dateNative.getFullYear();
+                        nowYear = twSettings.defaultDate ? $(this).datepicker('getDate').getFullYear() : dateNative.getFullYear();
 
                     $yearSelect.children(':selected').removeAttr('selected');
                     if($yearSelect.children('[value=' + nowYear + ']').length > 0){
@@ -162,7 +154,6 @@
                 var zh_data_arr = zh_date.split('-');
                 var year = (parseInt(zh_data_arr[0]) + 1911);
 
-                //console.log(year);
                 var date_obj = new Date(
                     year+'-'+zh_data_arr[1]+'-'+zh_data_arr[2]
                 );
