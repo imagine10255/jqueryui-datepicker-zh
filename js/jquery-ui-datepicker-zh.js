@@ -55,7 +55,7 @@
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: true,
-        yearSuffix: '年',
+        yearSuffix: '',
 
         onSelect: function(dateText, inst){
             $(this).val(funcColle.onSelect.basic(dateText, inst));

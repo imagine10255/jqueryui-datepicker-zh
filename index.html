@@ -4,19 +4,82 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
     <link href="./core/jquery-ui.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="form-group">
 
-    <label class="control-label col-md-2 bg-green "><span class="required"></span> Birthday</label>
-    <div class="col-md-10">
-        <input type="text" class="form-control" name="birthday_tw" id="birthday_tw"
-               value=""
-               placeholder="74-11-22" required/>
+<fieldset style="max-width: 600px;margin: 10px auto">
+    民國年月曆範例
+    <div class="row">
+        <label class="control-label col-md-2 bg-green "><span class="required"></span> Sample 1</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="birthday_tw" id="birthday_tw_sample1"
+                   value=""
+                   placeholder="74-11-22" required/>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <label class="control-label col-md-2 bg-green "><span class="required"></span> Sample 2</label>
+        <div class="col-md-10">
+            <input type="text" class="form-control" name="birthday_tw" id="birthday_tw_sample2"
+                   value=""
+                   placeholder="74-11-22" required/>
+        </div>
+    </div>
+
+    <code style="display: none">
+
+        if (!function_exists('date_iso8601_zh')) {
+
+            /**
+            * 西元年轉民國年
+            * @param string $datetime
+            * @param mixed|void $format
+            * @return string
+            */
+            function date_iso8601_zh($datetime,$format="Y-m-d")
+            {
+                //you can enter 'now'
+                $datetime = clear_space($datetime);
+                if(empty($datetime)){
+                    return null;
+                }else {
+                    $date = new DateTime($datetime);
+                    $date->modify("-1911 year");
+                    // 由於Y為四位數，所以利用ltrim去0
+                    return ltrim($date->format($format), "0");
+                }
+            }
+        }
+
+
+        if (!function_exists('date_zh_iso8601')) {
+
+            /**
+            * 民國年轉西元年 75-12-14 => 1986-12-14
+            * @param string $datetime
+            * @param mixed|void $format
+            * @return string
+            */
+            function date_zh_iso8601($datetime,$format="Y-m-d")
+            {
+                //you can enter 'now'
+                $datetime = clear_space($datetime);
+                if(empty($datetime)){
+                    return null;
+                }else{
+                    $date = new DateTime(str_pad($datetime,10,'0',STR_PAD_LEFT));
+                    $date->modify("+1911 year");
+                    return $date->format($format);
+                }
+            }
+        }
+    </code>
+</fieldset>
 </body>
 </html>
 
@@ -27,11 +90,18 @@
 <!-- zh format package-->
 <script src="./js/jquery-ui-datepicker-zh.js"></script>
 <script>
-    $( "#birthday_tw" ).datepickerTW({
+    $( "#birthday_tw_sample1" ).datepickerTW({
         changeMonth: true,
         changeYear: true,
         dateFormat: 'yy-mm-dd',
-        yearRange: '30',
-//        yearRange: '50:106',
+        yearRange: '30'
     });
+
+    $( "#birthday_tw_sample2" ).datepickerTW({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        yearRange: '80:100'
+    });
+
 </script>

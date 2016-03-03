@@ -5,11 +5,12 @@
     height: 25px;
 }
 .ui-datepicker select.ui-datepicker-month{
-    margin-left: 5px;
+    /*margin-left: 5px;*/
     width: 76px;
 }
 .ui-datepicker select.ui-datepicker-year{
     width: 65px;
-    margin-right: 5px;
+    font-size: 12px;
+    /*margin-right: 5px;*/
     margin-left: 5px;
 }
