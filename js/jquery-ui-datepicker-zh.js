@@ -28,12 +28,10 @@
                  var yearNative = inst.selectedYear < 1911
                  ? inst.selectedYear + 1911 : inst.selectedYear;*/
                 dateNative = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
-                var yearTW = inst.selectedYear > 1911? pad_left(inst.selectedYear - 1911, 4): inst.selectedYear;
+                var yearTW = inst.selectedYear - 1911;
                 var monthTW = pad_left(inst.selectedMonth + 1, 2);
                 var dayTW = pad_left(inst.selectedDay, 2);
-                dateTW = new Date(yearTW + '-' +monthTW + '-' +dayTW + 'T00:00:00.000Z');
-                return $.datepicker.formatDate(twSettings.dateFormat, dateTW);
+                return yearTW + '-' +monthTW + '-' +dayTW;
             }
         }
     };
